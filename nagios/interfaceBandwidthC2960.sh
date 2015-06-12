@@ -7,9 +7,11 @@
 # e.g. './interfaceBandwidthC2960.sh 10.10.10.1 10102' will output bandwidth information for port 2 on switch with
 # that ip address. There is no parameter for snmp community or verson but you can either add them
 # or modify the hard coded values if you like.
+#
 # Nagios uses this in a check command. like such
 # $USER1$/interfaceBandwidthC2960.sh "$HOSTNAME$" "$ARG1$" "$SERVICEOUTPUT$"
-# and will output
+# host or service will call check-commmand-named!portnumber
+# and script will output
 # '<values> | <perf data>' and exit with 0 (ok) 
 
 if [ -z "$1" ]
@@ -38,9 +40,7 @@ currentoutput=$(snmpget -v 2c -c public -mIF-MIB -O qv $1 ifOutOctets.$2)
 unixtime=$(date +%s)
 maxvalue="4294967295"
 
-olddata=${3-inputocts=0,outputocts=0,inputbits=0,outputbits=0,time=(( $unixtime - 1 ))}
-
-IFS=',' read -a oldioarray <<< "$olddata"
+IFS=',' read -a oldioarray <<< "$3"
 
 oldinput=$(echo ${oldioarray[0]} | cut -d'=' -f2)
 oldoutput=$(echo ${oldioarray[1]} | cut -d'=' -f2)
