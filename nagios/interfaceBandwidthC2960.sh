@@ -14,6 +14,11 @@
 # and script will output
 # '<values> | <perf data>' and exit with 0 (ok) 
 
+##
+## To Do
+##
+## Keep track of counter-resets.
+
 if [ -z "$1" ]
   then
     echo "No argument supplied"
