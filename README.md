@@ -3,6 +3,10 @@ scripts for stuff
 
 
 ### Nagios #
+
+#### *check_apc_ups.sh*
+`checks to see if our APC UPS is functioning ok`
+
 #### *check_md3000.sh*
 `this script will check a dell md3000 for any errors and report them back to nagios`
 
