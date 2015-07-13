@@ -5,14 +5,14 @@
 
 # get snmp valuse
 
-UPS_CAPACITY=$(snmpget -c public -v 1 -m PowerNet-MIB -O qv 192.168.1.245 upsAdvBatteryCapacity.0)
-UPS_TEMPERATURE=$(snmpget -c public -v 1 -m PowerNet-MIB -O qv 192.168.1.245 upsAdvBatteryTemperature.0)
-UPS_BATTERIES=$(snmpget -c public -v 1 -m PowerNet-MIB -O qv 192.168.1.245 upsAdvBatteryNumOfBattPacks.0)
-UPS_BADBATTERIES=$(snmpget -c public -v 1 -m PowerNet-MIB -O qv 192.168.1.245 upsAdvBatteryNumOfBadBattPacks.0)
-UPS_LASTTEST=$(snmpget -c public -v 1 -m PowerNet-MIB -O qv 192.168.1.245 upsAdvTestLastDiagnosticsDate.0)
+UPS_CAPACITY=$(snmpget -c public -v 1 -m PowerNet-MIB -O qv $1 upsAdvBatteryCapacity.0)
+UPS_TEMPERATURE=$(snmpget -c public -v 1 -m PowerNet-MIB -O qv $1 upsAdvBatteryTemperature.0)
+UPS_BATTERIES=$(snmpget -c public -v 1 -m PowerNet-MIB -O qv $1 upsAdvBatteryNumOfBattPacks.0)
+UPS_BADBATTERIES=$(snmpget -c public -v 1 -m PowerNet-MIB -O qv $1 upsAdvBatteryNumOfBadBattPacks.0)
+UPS_LASTTEST=$(snmpget -c public -v 1 -m PowerNet-MIB -O qv $1 upsAdvTestLastDiagnosticsDate.0)
 UPS_LASTTEST=$(echo "$UPS_LASTTEST" | sed -e 's/^"//'  -e 's/"$//')
 UPS_LASTTESTDATE=$(date --utc --date $UPS_LASTTEST +%s )
-UPS_LASTTESTRESULT=$(snmpget -c public -v 1 -m PowerNet-MIB -O qv 192.168.1.245 upsAdvTestDiagnosticsResults.0)
+UPS_LASTTESTRESULT=$(snmpget -c public -v 1 -m PowerNet-MIB -O qv $1 upsAdvTestDiagnosticsResults.0)
 
 STATUSINFO=""
 STATUS=0
